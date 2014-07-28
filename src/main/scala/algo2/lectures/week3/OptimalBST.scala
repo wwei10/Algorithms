@@ -35,5 +35,7 @@ object OptimalBST {
     println(optbst(nodes1))
     val nodes2 = Array(1.0, 34.0, 33.0, 32.0)
     println(optbst(nodes2))
+    val nodes3: Array[Double] = Array(.05, .4, .08, .04, .1, .1, .23)
+    println(optbst(nodes3))
   }
 }
