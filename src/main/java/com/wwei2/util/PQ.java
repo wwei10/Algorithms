@@ -67,17 +67,19 @@ public class PQ<T extends Comparable<T>> {
    * Remove a specified element.
    * @param elem
    */
-  public void delete(T elem) {
+  public T delete(T elem) {
     if (!map.containsKey(elem)) {
       throw new NoSuchElementException("key is not found in the priority queue");
     }
     int index = map.get(elem);
+    T tmp = pq.get(index);
     swap(index, size);
     pq.remove(size);
     map.remove(elem);
     size--;
     swim(index);
     sink(index);
+    return tmp;
   }
 
   /**
@@ -92,6 +94,38 @@ public class PQ<T extends Comparable<T>> {
     pq.set(index, elem);
     swim(index);
     sink(index);
+  }
+
+  /**
+   * Increase key. If key is not increased, do nothing.
+   * @param elem
+   */
+  public void increaseKey(T elem) {
+    if (!map.containsKey(elem)) {
+      throw new NoSuchElementException("Key is not found in the priority queue");
+    }
+    int index = map.get(elem);
+    T oldElem = pq.get(index);
+    if (elem.compareTo(oldElem) > 0) {
+      pq.set(index, elem);
+      swim(index);
+    }
+  }
+
+  /**
+   * Decrease key. If key is not decreased, do nothing.
+   * @param elem
+   */
+  public void decreaseKey(T elem) {
+    if (!map.containsKey(elem)) {
+      throw new NoSuchElementException("Key is not found in the priority queue");
+    }
+    int index = map.get(elem);
+    T oldElem = pq.get(index);
+    if (elem.compareTo(oldElem) < 0) {
+      pq.set(index, elem);
+      sink(index);
+    }
   }
 
   /**
@@ -150,7 +184,7 @@ public class PQ<T extends Comparable<T>> {
    */
   private void swim(int index) {
     if (index <= 0 || index > size) {
-      throw new IndexOutOfBoundsException();
+      return;
     }
     int parent = index / 2;
     while (parent > 0 && less(parent, index)) {
