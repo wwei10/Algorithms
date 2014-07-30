@@ -23,11 +23,11 @@ public class Util {
     String line = null;
     while ((line = br.readLine()) != null) {
       String[] strs = line.split("\t");
-      int node = Integer.parseInt(strs[0]);
+      int node = Integer.parseInt(strs[0]) - 1;
       Map<Integer, Integer> tmp = new HashMap<>();
       for (int i = 1; i < strs.length; i++) {
         String[] pair = strs[i].split(",");
-        int vertex = Integer.parseInt(pair[0]);
+        int vertex = Integer.parseInt(pair[0]) - 1;
         int edgeCost = Integer.parseInt(pair[1]);
         tmp.put(vertex, edgeCost);
       }

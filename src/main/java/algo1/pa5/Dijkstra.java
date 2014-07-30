@@ -1,6 +1,6 @@
 package algo1.pa5;
 
-import com.wwei2.util.PQ;
+import com.wwei2.util.IndexMinPQ;
 
 import java.io.IOException;
 import java.util.*;
@@ -9,7 +9,7 @@ import java.util.*;
  * Dijkstra's algorithm.
  */
 public class Dijkstra {
-  private static int MAXINT = 1000000;
+  private static int INTMAX = 1000000;
   private Map<Integer, Map<Integer, Integer>> adjList; // Adjacency list.
   private int num; // Number of nodes.
   private int source; // The index of the source node.
@@ -33,31 +33,28 @@ public class Dijkstra {
   }
 
   private void shortestPath() {
-    PQ<Node> pq = new PQ<>(num);
+    IndexMinPQ<Integer> pq = new IndexMinPQ<Integer>(adjList.size());
     for (Map.Entry<Integer, Map<Integer, Integer>> entry : adjList.entrySet()) {
       int node = entry.getKey();
       if (node != source) {
-        pq.insert(new Node(node, MAXINT));
+        pq.insert(node, INTMAX);
       } else {
-        pq.insert(new Node(node, 0));
+        pq.insert(node, 0);
       }
     }
-    while (pq.size() != 0) {
-      Node node = pq.delMax();
-      int index = node.getIndex();
-      int distance = node.getDist();
+    while (!pq.isEmpty()) {
+      int distance = pq.minKey();
+      int index = pq.delMin();
       dist.put(index, distance);
       Set<Integer> neighbors = adjList.get(index).keySet();
       for (int neighbor : neighbors) {
         if (!dist.containsKey(neighbor)) {
-          Node tmp = pq.delete(new Node(neighbor, 0));
-          int tmpIndex = tmp.getIndex();
-          int tmpDist = tmp.getDist();
-          int betweenDist = adjList.get(index).get(tmpIndex);
+          int tmpDist = pq.delete(neighbor);
+          int betweenDist = adjList.get(index).get(neighbor);
           if (distance + betweenDist < tmpDist) {
-            pq.insert(new Node(tmpIndex, distance + betweenDist));
+            pq.insert(neighbor, distance + betweenDist);
           } else {
-            pq.insert(new Node(tmpIndex, tmpDist));
+            pq.insert(neighbor, tmpDist);
           }
         }
       }

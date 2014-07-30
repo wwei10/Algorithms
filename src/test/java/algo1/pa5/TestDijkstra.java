@@ -9,17 +9,17 @@ import org.junit.Test;
 public class TestDijkstra {
   @Test
   public void testLarge() {
-    Dijkstra dijkstra = new Dijkstra(1, "/algo1/pa5/dijkstraData.txt");
-    int d7 = dijkstra.getDistance(7);
-    int d37 = dijkstra.getDistance(37);
-    int d59 = dijkstra.getDistance(59);
-    int d82 = dijkstra.getDistance(82);
-    int d99 = dijkstra.getDistance(99);
-    int d115 = dijkstra.getDistance(115);
-    int d133 = dijkstra.getDistance(133);
-    int d165 = dijkstra.getDistance(165);
-    int d188 = dijkstra.getDistance(188);
-    int d197 = dijkstra.getDistance(197);
+    Dijkstra dijkstra = new Dijkstra(0, "/algo1/pa5/dijkstraData.txt");
+    int d7 = dijkstra.getDistance(6);
+    int d37 = dijkstra.getDistance(36);
+    int d59 = dijkstra.getDistance(58);
+    int d82 = dijkstra.getDistance(81);
+    int d99 = dijkstra.getDistance(98);
+    int d115 = dijkstra.getDistance(114);
+    int d133 = dijkstra.getDistance(132);
+    int d165 = dijkstra.getDistance(164);
+    int d188 = dijkstra.getDistance(187);
+    int d197 = dijkstra.getDistance(196);
     Assert.assertEquals(2599, d7);
     Assert.assertEquals(2610, d37);
     Assert.assertEquals(2947, d59);

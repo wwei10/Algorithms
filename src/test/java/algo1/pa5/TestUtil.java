@@ -15,11 +15,11 @@ public class TestUtil {
     String filename = "/algo1/pa5/test.txt";
     try {
       Map<Integer, Map<Integer, Integer>> map = Util.getData(filename);
-      int value = map.get(1).get(80);
+      int value = map.get(0).get(79);
       Assert.assertEquals(982, value);
-      value = map.get(5).get(200);
+      value = map.get(4).get(199);
       Assert.assertEquals(4009, value);
-      value = map.get(3).get(57);
+      value = map.get(2).get(56);
       Assert.assertEquals(1239, value);
     } catch (IOException e) {
       e.printStackTrace();
