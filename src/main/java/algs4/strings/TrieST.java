@@ -209,7 +209,6 @@ public class TrieST<Value> {
       }
       return;
     }
-    assert length < pattern.length() : "length: " + length + " pattern length: " + pattern.length();
     char ch = pattern.charAt(length);
     if (ch == '.') {
       for (char c = 0; c < K; c++) {
